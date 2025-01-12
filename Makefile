@@ -2,7 +2,7 @@ run: os-image
 	qemu-system-x86_64 -fda $<
 
 os-image: boot.bin kernel.bin
-	cat $^ > $@
+	cat $^ > $@ && mv *.o *.bin build/
 
 kernel.bin: kernel_entry.o kernel.o
 	ld -m elf_i386 -o $@ -Ttext 0x1000 $^ --oformat binary
